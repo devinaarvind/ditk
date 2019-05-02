@@ -6,6 +6,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from relation_extraction import *
 import argparse
+import logging
 
 
 """
@@ -775,14 +776,10 @@ class RESIDE(RelationExtraction):
 
 			if step % 100 == 0:
 				self.logger.info('{} ({}/{}):\t{:.5}\t{:.5}\t{}'.format(label, bag_cnt, len(self.data['test']), np.mean(accuracies)*100, np.mean(losses), self.p.name))
-				x_pred = np.argmax(y_pred)
-				x_actual = np.argmax(y)
-
-				print("Predicted relation ",str(x_pred))
-				print("Actual relation",str(x_actual))
-
-				f.write("Predicted relation:" + str(x_pred) + "\n")
-				f.write("Actual relation:" + str(x_actual) + "\n")
+				print("Predicted relation ",np.argmax(y_pred))
+				print("Actual relation",np.argmax(y))
+				f.write("Predicted relation:" + str(np.argmax(y_pred)) + "\n")
+				f.write("Actual relation:" + str(np.argmax(y_pred)) + "\n")
 
 
 
@@ -990,7 +987,7 @@ class RESIDE(RelationExtraction):
 		Returns: 
             (optional):Data from file
 		"""
-		pass
+		return 1
 
 
 	
@@ -1003,7 +1000,7 @@ class RESIDE(RelationExtraction):
 		Returns:
 			Formatted data for further use.
 		"""
-		pass 
+		return 1
 
 
 	
@@ -1065,6 +1062,39 @@ class RESIDE(RelationExtraction):
 		:return:
 		"""
 		pass
+import time
+class reside:
+	def read_dataset(self, input_file, *args, **kwargs):  
+		"""
+		Reads a dataset to be used for training
+         
+         Note: The child file of each member overrides this function to read dataset 
+         according to their data format.
+         
+		Args:
+			input_file: Filepath with list of files to be read
+		Returns: 
+            (optional):Data from file
+
+		"""
+		time.sleep(1000)
+		return 1
+
+
+	
+	def data_preprocess(self,input_data, *args, **kwargs):
+		"""
+         (Optional): For members who do not need preprocessing. example: .pkl files 
+         A common function for a set of data cleaning techniques such as lemmatization, count vectorizer and so forth.
+		Args: 
+			input_data: Raw data to tokenize
+		Returns:
+			Formatted data for further use.
+		"""
+		time.sleep(1000)
+		return 1
+
+
 
 def main(input_file_path):
 
@@ -1123,20 +1153,5 @@ def main(input_file_path):
 		model.fit(sess)
 
 if '__main__' == __name__:
-	f = open("output.txt","a")
 	main('./data/riedel_processed.pkl')
-	f.close()
-
-
-
-
-
-
-
-
-
-
-
-
-
 
